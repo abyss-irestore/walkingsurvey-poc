@@ -1,0 +1,27 @@
+#panel-elements{
+    height: 100%;
+    background: #434343;
+    width: 25%;
+    position: absolute;
+}
+
+#panel-elements .elements-container {
+    margin-top: 25%;
+}
+
+.elements-container li {
+    list-style: none;
+    cursor: pointer;
+}
+
+li{
+    color: white;
+}
+
+h2, h1{
+    font-size: 1rem;
+}
+
+h3{
+    font-size: 0.9rem;
+}
