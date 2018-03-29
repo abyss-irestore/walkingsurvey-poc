@@ -38,6 +38,10 @@ export class SurveysListComponent implements OnInit, ChildComponent {
 
     }
 
+    onBack(){
+        this.selectedSurvey = null;
+    }
+
     zoomChanged(ev) {
         console.log(ev);
     }

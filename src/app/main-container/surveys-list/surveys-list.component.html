@@ -22,6 +22,8 @@
 
     <div class="survey-detail container-fluid" *ngIf="selectedSurvey !== null">
 
+        <div class="row back-btn" (click)="onBack()"><h2>&#8592; Back to list</h2></div>
+
         <div class="row">
             <ngui-map style="height: 400px; width: 100%" zoom="18" center={{center}} (zoom_changed)="zoomChanged($event)">
                 <polyline [path]="path"></polyline>
