@@ -53,7 +53,7 @@ export class MainContainerComponent implements OnInit {
                 currentComponent = MapViewComponent;
                 break;
             default:
-                currentComponent = null;
+                currentComponent = SurveysListComponent;
         }
 
         if (!currentComponent) return false;
