@@ -1,19 +1,32 @@
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15" style="height: 100%">
-    <agm-info-window [disableAutoPan]="true" (infoWindowClose)="onInfoWindowClose()" [latitude]="infoWindowDetails.lat" [longitude]="infoWindowDetails.lng" #infoWindow>
+    <agm-info-window [disableAutoPan]="true" (infoWindowClose)="onInfoWindowClose()" [latitude]="infoWindowDetails.lat"
+                     [longitude]="infoWindowDetails.lng" #infoWindow>
 
-
-        <div *ngIf="infoWindowDetails.Creator"><strong>Creator: </strong> <p>{{infoWindowDetails.Creator}}</p></div>
-        <div *ngIf="infoWindowDetails.CreationDate"><strong>Creation Date: </strong> <p>{{infoWindowDetails.CreationDate | date:'mediumDate'}}</p></div>
-        <div *ngIf="infoWindowDetails.GlobalID"><strong>Global ID: </strong> <p>{{infoWindowDetails.GlobalID}}</p></div>
-        <div *ngIf="infoWindowDetails.formattedAddress"><strong>Address: </strong> <p>{{infoWindowDetails.formattedAddress}}</p></div>
-        <div *ngIf="infoWindowDetails.DATECREATE"><strong>Date Created: </strong> <p>{{infoWindowDetails.DATECREATE | date:'mediumDate'}}</p></div>
-        <div *ngIf="infoWindowDetails.MATERIAL"><strong>Material: </strong> <p>{{infoWindowDetails.MATERIAL}}</p></div>
-        <div *ngIf="infoWindowDetails.FUELTYPE"><strong>Fuel Type: </strong> <p>{{infoWindowDetails.FUELTYPE}}</p></div>
-        <div *ngIf="infoWindowDetails.INSTALLDAT"><strong>Installation Date: </strong> <p>{{infoWindowDetails.INSTALLDAT | date:'mediumDate'}}</p></div>
-        <div *ngIf="infoWindowDetails.EditDate"><strong>Edit Date: </strong> <p>{{infoWindowDetails.EditDate | date:'mediumDate'}}</p></div>
-        <div *ngIf="infoWindowDetails.Editor"><strong>Editor: </strong> <p>{{infoWindowDetails.Editor}}</p></div>
-        <div *ngIf="infoWindowDetails.LASTUSER"><strong>Last Used By: </strong> <p>{{infoWindowDetails.LASTUSER}}</p></div>
-
+        <div *ngIf="infoWindowDetails.ready">
+            <div *ngIf="infoWindowDetails.Creator"><strong>Creator: </strong>
+                <p>{{infoWindowDetails.Creator}}</p></div>
+            <div *ngIf="infoWindowDetails.CreationDate"><strong>Creation Date: </strong>
+                <p>{{infoWindowDetails.CreationDate | date:'mediumDate'}}</p></div>
+            <div *ngIf="infoWindowDetails.GlobalID"><strong>Global ID: </strong>
+                <p>{{infoWindowDetails.GlobalID}}</p></div>
+            <div *ngIf="infoWindowDetails.formattedAddress"><strong>Address: </strong>
+                <p>{{infoWindowDetails.formattedAddress}}</p></div>
+            <div *ngIf="infoWindowDetails.DATECREATE"><strong>Date Created: </strong>
+                <p>{{infoWindowDetails.DATECREATE | date:'mediumDate'}}</p></div>
+            <div *ngIf="infoWindowDetails.MATERIAL"><strong>Material: </strong>
+                <p>{{infoWindowDetails.MATERIAL}}</p></div>
+            <div *ngIf="infoWindowDetails.FUELTYPE"><strong>Fuel Type: </strong>
+                <p>{{infoWindowDetails.FUELTYPE}}</p></div>
+            <div *ngIf="infoWindowDetails.INSTALLDAT"><strong>Installation Date: </strong>
+                <p>{{infoWindowDetails.INSTALLDAT | date:'mediumDate'}}</p></div>
+            <div *ngIf="infoWindowDetails.EditDate"><strong>Edit Date: </strong>
+                <p>{{infoWindowDetails.EditDate | date:'mediumDate'}}</p></div>
+            <div *ngIf="infoWindowDetails.Editor"><strong>Editor: </strong>
+                <p>{{infoWindowDetails.Editor}}</p></div>
+            <div *ngIf="infoWindowDetails.LASTUSER"><strong>Last Used By: </strong>
+                <p>{{infoWindowDetails.LASTUSER}}</p></div>
+        </div>
     </agm-info-window>
-    <agm-data-layer *ngIf="geoJsonObject" [geoJson]="geoJsonObject" (layerClick)="onLayerClick($event)" [style]="styleFunc"></agm-data-layer>
+    <agm-data-layer *ngIf="geoJsonObject" [geoJson]="geoJsonObject" (layerClick)="onLayerClick($event)"
+                    [style]="styleFunc"></agm-data-layer>
 </agm-map>

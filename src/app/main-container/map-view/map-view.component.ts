@@ -24,7 +24,7 @@ export class MapViewComponent implements OnInit, ChildComponent {
 
     @ViewChild('infoWindow') infoWindow: AgmInfoWindow;
 
-    infoWindowDetails: InfoWindowDetails = <InfoWindowDetails> {lat: 0, lng: 0, formattedAddress: ''};
+    infoWindowDetails: InfoWindowDetails = <InfoWindowDetails> {lat: 0, lng: 0, formattedAddress: '', ready: false};
 
 
     constructor(private mapsService: MapsService) {
@@ -66,18 +66,17 @@ export class MapViewComponent implements OnInit, ChildComponent {
         const lat = event.latLng.lat(),
             lng = event.latLng.lng();
 
-        this.infoWindowDetails = {lat, lng, formattedAddress: ''};
+        this.infoWindowDetails.ready = false;
 
 
         event.feature.setProperty('isSelected', true);
 
-
         this.infoWindow.close()
-            .then(() => this.infoWindow.open())
             .then(() => {
-                this.resolvingAddress = true;
                 geocoder.reverseGeocode(lat, lng, (err, data) => {
-                    this.resolvingAddress = false;
+
+
+
 
                     this.infoWindowDetails = _.pick(event.feature.f, [
                         'LASTUSER', 'GlobalID', 'CreationDate', 'Creator', 'EditDate', 'Editor',
@@ -89,7 +88,11 @@ export class MapViewComponent implements OnInit, ChildComponent {
                     this.infoWindowDetails.lat = event.latLng.lat();
                     this.infoWindowDetails.lng = event.latLng.lng();
 
+                    this.infoWindowDetails.ready = true;
+
                     this.previousFeature = event.feature;
+
+                    this.infoWindow.open().then(console.log)
                 });
 
             });
@@ -102,7 +105,8 @@ export class MapViewComponent implements OnInit, ChildComponent {
 interface InfoWindowDetails {
     lat: Number,
     lng: Number,
-    formattedAddress: String
+    formattedAddress: String,
+    ready: Boolean
 }
 
 
