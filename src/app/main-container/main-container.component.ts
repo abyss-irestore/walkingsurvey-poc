@@ -23,7 +23,7 @@ export class MainContainerComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.loadComponent(null);
+        this.loadComponent("survey");
     }
 
     @Input()
@@ -53,7 +53,7 @@ export class MainContainerComponent implements OnInit {
                 currentComponent = MapViewComponent;
                 break;
             default:
-                currentComponent = SurveysListComponent;
+                currentComponent = null;
         }
 
         if (!currentComponent) return false;
