@@ -1,5 +1,5 @@
 <div class="surveys-list">
-    <table class="table" *ngIf="selectedSurvey === null">
+    <table class="table table-hover" *ngIf="selectedSurvey === null">
         <thead>
         <tr>
             <th *ngFor="let column of columns" scope="col">{{column}}</th>
@@ -25,52 +25,58 @@
         <div class="row back-btn" (click)="onBack()"><span>&#8592; Back to list</span></div>
 
         <div class="row">
-            <ngui-map style="height: 400px; width: 100%" zoom="18" center={{center}} (zoom_changed)="zoomChanged($event)">
-                <polyline [path]="path"></polyline>
-            </ngui-map>
-        </div>
-
-        <div class="row">
             <div class="col-12">
-                <h4><strong>{{selectedSurvey.asset.assetAddress.resolvedAddress}}</strong></h4>
-                <h5>{{selectedSurvey.dateOfSurvey | date:'MMM dd, yyyy'}} By {{selectedSurvey.inspector.name}}</h5>
+                <ngui-map style="height: 400px; width: 100%" zoom="18" center={{center}}
+                          (zoom_changed)="zoomChanged($event)">
+                    <polyline [path]="path"></polyline>
+                </ngui-map>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-6">
-                <span class="pull-left"><strong>Asset ID: </strong></span>
-                <span class="pull-right">{{selectedSurvey.asset.assetId}}</span>
+        <div class="details">
+
+
+            <div class="row">
+                <div class="col-12">
+                    <h4><strong>{{selectedSurvey.asset.assetAddress.resolvedAddress}}</strong></h4>
+                    <h5>{{selectedSurvey.dateOfSurvey | date:'MMM dd, yyyy'}} By {{selectedSurvey.inspector.name}}</h5>
+                </div>
             </div>
-            <div class="col-6">
-                <span class="pull-left"><strong>Start Time: </strong></span>
-                <span class="pull-right">{{selectedSurvey.startTime | date:'mediumTime'}}</span>
+
+            <div class="row">
+                <div class="col-6">
+                    <span class="pull-left"><strong>Asset ID: </strong></span>
+                    <span class="pull-right">{{selectedSurvey.asset.assetId}}</span>
+                </div>
+                <div class="col-6">
+                    <span class="pull-left"><strong>Start Time: </strong></span>
+                    <span class="pull-right">{{selectedSurvey.startTime | date:'mediumTime'}}</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <span class="pull-left"><strong>Material Type: </strong></span>
+                    <span class="pull-right">{{selectedSurvey.asset.materialType}}</span>
+                </div>
+                <div class="col-6">
+                    <span class="pull-left"><strong>End Time: </strong></span>
+                    <span class="pull-right">{{selectedSurvey.endTime | date:'mediumTime'}}</span>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <span class="pull-left"><strong>Installation Date: </strong></span>
+                    <span class="pull-right">{{selectedSurvey.asset.installationDate | date:'MMM dd, yyyy'}}</span>
+                </div>
+                <div class="col-6">
+                    <span class="pull-left"><strong>Distance Travelled: </strong></span>
+                    <span class="pull-right">{{selectedSurvey.distanceTravelled}}</span>
+                </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-6">
-                <span class="pull-left"><strong>Material Type: </strong></span>
-                <span class="pull-right">{{selectedSurvey.asset.materialType}}</span>
-            </div>
-            <div class="col-6">
-                <span class="pull-left"><strong>End Time: </strong></span>
-                <span class="pull-right">{{selectedSurvey.endTime | date:'mediumTime'}}</span>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-6">
-                <span class="pull-left"><strong>Installation Date: </strong></span>
-                <span class="pull-right">{{selectedSurvey.asset.installationDate | date:'MMM dd, yyyy'}}</span>
-            </div>
-            <div class="col-6">
-                <span class="pull-left"><strong>Distance Travelled: </strong></span>
-                <span class="pull-right">{{selectedSurvey.distanceTravelled}}</span>
-            </div>
-        </div>
-
     </div>
 
 </div>
