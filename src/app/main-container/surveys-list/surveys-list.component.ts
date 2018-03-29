@@ -15,7 +15,7 @@ export class SurveysListComponent implements OnInit, ChildComponent {
     center = '';
     path = [];
 
-    private columns: Array<String> = ["Survey", "Inspector", "Town", "Leak", "Date", "Start Time", "End Time", "Distance Travelled"];
+    columns: Array<String> = ["Survey", "Inspector", "Town", "Leak", "Date", "Start Time", "End Time", "Distance Travelled"];
 
     constructor(private surveysService: SurveysService) {
     }

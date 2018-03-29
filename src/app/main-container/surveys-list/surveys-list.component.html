@@ -11,7 +11,7 @@
             <td scope="row">{{survey.inspector?.name}}</td>
             <td scope="row">{{survey.asset?.assetAddress.subLocality}}</td>
             <td scope="row">{{survey.leak}}</td>
-            <td scope="row">{{survey.dateOfSurvey}}</td>
+            <td scope="row">{{survey.dateOfSurvey | date:'MMM/dd/yyyy'}}</td>
             <td scope="row">{{survey.startTime | date:'mediumTime'}}</td>
             <td scope="row">{{survey.endTime | date:'mediumTime'}}</td>
             <td scope="row">{{survey.distanceTravelled}}</td>
