@@ -11,7 +11,7 @@
             <td scope="row">{{survey.inspector?.name}}</td>
             <td scope="row">{{survey.asset?.assetAddress.subLocality}}</td>
             <td scope="row">{{survey.leak}}</td>
-            <td scope="row">{{survey.dateOfSurvey | date:'MMM/dd/yyyy'}}</td>
+            <td scope="row">{{survey.dateOfSurvey | date:'MMM dd, yyyy'}}</td>
             <td scope="row">{{survey.startTime | date:'mediumTime'}}</td>
             <td scope="row">{{survey.endTime | date:'mediumTime'}}</td>
             <td scope="row">{{survey.distanceTravelled}}</td>
@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-12">
                 <h4><strong>{{selectedSurvey.asset.assetAddress.resolvedAddress}}</strong></h4>
-                <h5>{{selectedSurvey.dateOfSurvey | date:'MMM/dd/yyyy'}} By {{selectedSurvey.inspector.name}}</h5>
+                <h5>{{selectedSurvey.dateOfSurvey | date:'MMM dd, yyyy'}} By {{selectedSurvey.inspector.name}}</h5>
             </div>
         </div>
 
@@ -63,7 +63,7 @@
         <div class="row">
             <div class="col-6">
                 <span class="pull-left"><strong>Installation Date: </strong></span>
-                <span class="pull-right">{{selectedSurvey.asset.installationDate | date:'MMM/dd/yyyy'}}</span>
+                <span class="pull-right">{{selectedSurvey.asset.installationDate | date:'MMM dd, yyyy'}}</span>
             </div>
             <div class="col-6">
                 <span class="pull-left"><strong>Distance Travelled: </strong></span>
