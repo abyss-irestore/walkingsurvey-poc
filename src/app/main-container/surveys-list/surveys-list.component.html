@@ -6,7 +6,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let survey of surveys | async; let i=index" (click)="selectSurvey(i)">
+        <tr *ngFor="let survey of surveys | async; let i=index" (click)="selectSurvey(i)" class="survey-item">
             <td scope="row">{{survey.asset?.assetAddress.resolvedAddress}}</td>
             <td scope="row">{{survey.inspector?.name}}</td>
             <td scope="row">{{survey.asset?.assetAddress.subLocality}}</td>
