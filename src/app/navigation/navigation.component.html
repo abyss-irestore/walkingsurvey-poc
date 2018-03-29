@@ -1,15 +1,19 @@
 <ul id="panel-elements">
     <div class="elements-container">
         <li (click)="changeView('survey')"><h2>View Surveys</h2></li>
-        <h2>Map</h2>
-        <li (click)="changeView('map', 'dist')">
-            <h3>Distribution Lines</h3>
-        </li>
-        <li (click)="changeView('map', 'maps')">
-            <h3>Mapped Services</h3>
-        </li>
-        <li (click)="changeView('map', 'sep')">
-            <h3>Service Points</h3>
-        </li>
+
+        <div class="view-assets">
+            <h2>View Assets</h2>
+
+            <li (click)="changeView('map', 'dist')">
+                <h3>Distribution Lines</h3>
+            </li>
+            <li (click)="changeView('map', 'maps')">
+                <h3>Mapped Services</h3>
+            </li>
+            <li (click)="changeView('map', 'sep')">
+                <h3>Service Points</h3>
+            </li>
+        </div>
     </div>
 </ul>

@@ -25,3 +25,7 @@ h2, h1{
 h3{
     font-size: 0.9rem;
 }
+
+.view-assets li{
+    margin-left: 10px;
+}
