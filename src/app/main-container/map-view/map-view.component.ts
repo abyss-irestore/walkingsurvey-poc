@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MapsService} from "./maps.service";
 import {ChildComponent} from "../child-component";
 import {AgmInfoWindow} from "@agm/core";
@@ -19,6 +19,8 @@ export class MapViewComponent implements OnInit, ChildComponent {
     resolvingAddress: Boolean = false;
     data = null;
     geoJsonObject: GeoJsonObject;
+
+    previousFeature: any;
 
     @ViewChild('infoWindow') infoWindow: AgmInfoWindow;
 
@@ -42,12 +44,33 @@ export class MapViewComponent implements OnInit, ChildComponent {
             .catch(console.log);
     }
 
+    styleFunc(feature){
+        const color = 'red';
+        if (feature.getProperty('isSelected')) {
+            return ({
+                fillColor: color,
+                strokeColor: color,
+                strokeWeight: 2
+            });
+        }
+
+    }
+
+    onInfoWindowClose(){
+        if(this.previousFeature) this.previousFeature.setProperty('isSelected', false);
+    }
+
+
     onLayerClick(event) {
 
         const lat = event.latLng.lat(),
             lng = event.latLng.lng();
 
         this.infoWindowDetails = {lat, lng, formattedAddress: ''};
+
+
+        event.feature.setProperty('isSelected', true);
+
 
         this.infoWindow.close()
             .then(() => this.infoWindow.open())
@@ -65,10 +88,11 @@ export class MapViewComponent implements OnInit, ChildComponent {
                     this.infoWindowDetails.formattedAddress = data.results && !!data.results.length ? data.results[0].formatted_address : '';
                     this.infoWindowDetails.lat = event.latLng.lat();
                     this.infoWindowDetails.lng = event.latLng.lng();
+
+                    this.previousFeature = event.feature;
                 });
 
             });
-
 
     }
 
