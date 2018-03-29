@@ -1,9 +1,11 @@
 <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15" style="height: 100%">
     <agm-info-window [disableAutoPan]="true" [latitude]="infoWindowDetails.lat" [longitude]="infoWindowDetails.lng" #infoWindow>
 
+
         <div *ngIf="infoWindowDetails.Creator"><strong>Creator: </strong> <p>{{infoWindowDetails.Creator}}</p></div>
         <div *ngIf="infoWindowDetails.CreationDate"><strong>Creation Date: </strong> <p>{{infoWindowDetails.CreationDate | date:'mediumDate'}}</p></div>
         <div *ngIf="infoWindowDetails.GlobalID"><strong>Global ID: </strong> <p>{{infoWindowDetails.GlobalID}}</p></div>
+        <div *ngIf="infoWindowDetails.formattedAddress"><strong>Address: </strong> <p>{{infoWindowDetails.formattedAddress}}</p></div>
         <div *ngIf="infoWindowDetails.DATECREATE"><strong>Date Created: </strong> <p>{{infoWindowDetails.DATECREATE | date:'mediumDate'}}</p></div>
         <div *ngIf="infoWindowDetails.MATERIAL"><strong>Material: </strong> <p>{{infoWindowDetails.MATERIAL}}</p></div>
         <div *ngIf="infoWindowDetails.FUELTYPE"><strong>Fuel Type: </strong> <p>{{infoWindowDetails.FUELTYPE}}</p></div>

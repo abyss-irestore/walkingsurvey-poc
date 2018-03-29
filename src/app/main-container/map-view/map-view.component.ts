@@ -4,6 +4,7 @@ import {ChildComponent} from "../child-component";
 import {AgmInfoWindow} from "@agm/core";
 
 import * as _ from "lodash";
+import * as geocoder from "geocoder";
 
 
 @Component({
@@ -15,13 +16,13 @@ export class MapViewComponent implements OnInit, ChildComponent {
 
     lng: number = -108.12988;
     lat: number = 40.60326;
-
+    resolvingAddress: Boolean = false;
     data = null;
     geoJsonObject: GeoJsonObject;
 
     @ViewChild('infoWindow') infoWindow: AgmInfoWindow;
 
-    infoWindowDetails: InfoWindowDetails = <InfoWindowDetails> {lat: 0, lng: 0};
+    infoWindowDetails: InfoWindowDetails = <InfoWindowDetails> {lat: 0, lng: 0, formattedAddress: ''};
 
 
     constructor(private mapsService: MapsService) {
@@ -42,25 +43,42 @@ export class MapViewComponent implements OnInit, ChildComponent {
     }
 
     onLayerClick(event) {
-        this.infoWindowDetails = _.pick(event.feature.f, [
-            'LASTUSER', 'GlobalID', 'CreationDate', 'Creator', 'EditDate', 'Editor',
-            'DATECREATE','DATEMODIFI', 'MATERIAL', 'FUELTYPE', 'CPSYSTEMNU',
-            'INSTALLDAT', 'SPIPENO_SE', 'SHAPE_STLe', 'REMARKS'
-        ]);
+
+        const lat = event.latLng.lat(),
+            lng = event.latLng.lng();
+
+        this.infoWindowDetails = {lat, lng, formattedAddress: ''};
+
+        this.infoWindow.close()
+            .then(() => this.infoWindow.open())
+            .then(() => {
+                this.resolvingAddress = true;
+                geocoder.reverseGeocode(lat, lng, (err, data) => {
+                    this.resolvingAddress = false;
+
+                    this.infoWindowDetails = _.pick(event.feature.f, [
+                        'LASTUSER', 'GlobalID', 'CreationDate', 'Creator', 'EditDate', 'Editor',
+                        'DATECREATE', 'DATEMODIFI', 'MATERIAL', 'FUELTYPE', 'CPSYSTEMNU',
+                        'INSTALLDAT', 'SPIPENO_SE', 'SHAPE_STLe', 'REMARKS'
+                    ]);
+
+                    this.infoWindowDetails.formattedAddress = data.results && !!data.results.length ? data.results[0].formatted_address : '';
+                    this.infoWindowDetails.lat = event.latLng.lat();
+                    this.infoWindowDetails.lng = event.latLng.lng();
+                });
+
+            });
 
 
-        this.infoWindowDetails.lat = event.latLng.lat();
-        this.infoWindowDetails.lng = event.latLng.lng();
-
-        this.infoWindow.open().then(console.log);
     }
 
 
 }
 
-interface InfoWindowDetails{
+interface InfoWindowDetails {
     lat: Number,
-    lng: Number
+    lng: Number,
+    formattedAddress: String
 }
 
 
