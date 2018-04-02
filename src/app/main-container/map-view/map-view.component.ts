@@ -44,7 +44,7 @@ export class MapViewComponent implements OnInit, ChildComponent {
             .catch(console.log);
     }
 
-    styleFunc(feature){
+    styleFunc(feature) {
         const color = 'red';
         if (feature.getProperty('isSelected')) {
             return ({
@@ -56,8 +56,8 @@ export class MapViewComponent implements OnInit, ChildComponent {
 
     }
 
-    onInfoWindowClose(){
-        if(this.previousFeature) this.previousFeature.setProperty('isSelected', false);
+    onInfoWindowClose() {
+        if (this.previousFeature) this.previousFeature.setProperty('isSelected', false);
     }
 
 
@@ -69,15 +69,11 @@ export class MapViewComponent implements OnInit, ChildComponent {
         this.infoWindowDetails.ready = false;
 
 
-        event.feature.setProperty('isSelected', true);
-
         this.infoWindow.close()
             .then(() => {
+                event.feature.setProperty('isSelected', true);
+
                 geocoder.reverseGeocode(lat, lng, (err, data) => {
-
-
-
-
                     this.infoWindowDetails = _.pick(event.feature.f, [
                         'LASTUSER', 'GlobalID', 'CreationDate', 'Creator', 'EditDate', 'Editor',
                         'DATECREATE', 'DATEMODIFI', 'MATERIAL', 'FUELTYPE', 'CPSYSTEMNU',
@@ -93,6 +89,7 @@ export class MapViewComponent implements OnInit, ChildComponent {
                     this.previousFeature = event.feature;
 
                     this.infoWindow.open().then(console.log)
+
                 });
 
             });
